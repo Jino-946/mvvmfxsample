@@ -11,6 +11,17 @@
 		<maven.compiler.target>15</maven.compiler.target>
 		<mainClass>org.m946.mvvmfxsample.Starter</mainClass>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jdbi</groupId>
+				<artifactId>jdbi3-bom</artifactId>
+				<type>pom</type>
+				<version>3.16.0</version>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>
@@ -27,6 +38,17 @@
 			<artifactId>mvvmfx</artifactId>
 			<version>1.8.0</version>
 		</dependency>
+		<!-- Database Access -->
+		<dependency>
+			<groupId>org.firebirdsql.jdbc</groupId>
+			<artifactId>jaybird</artifactId>
+			<version>4.0.2.java11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdbi</groupId>
+			<artifactId>jdbi3-core</artifactId>
+		</dependency>
+		<!-- Database Access -->
 	</dependencies>
 	<build>
 		<plugins>
