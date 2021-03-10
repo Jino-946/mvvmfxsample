@@ -3,7 +3,6 @@ module org.m946.mvvmfxsample {
     requires javafx.fxml;
     requires de.saxsys.mvvmfx;
     requires transitive javafx.base;
-	requires org.jdbi.v3.core;
 	requires javafx.graphics;
 	requires junit;
     
