@@ -8,7 +8,7 @@ public class DbService {
 	public boolean checkConnection() {
 		Integer n = jdbi.withHandle(handle ->
 			handle.createQuery("select 1 from rdb$database")
-			.mapTo(Integer.class)
+			.mapTo(Integer.class)		
 			.one()
 		);
 		return n == 1 ? true : false;

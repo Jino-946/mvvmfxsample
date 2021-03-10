@@ -4,6 +4,8 @@ module org.m946.mvvmfxsample {
     requires de.saxsys.mvvmfx;
     requires transitive javafx.base;
 	requires org.jdbi.v3.core;
+	requires javafx.graphics;
+	requires junit;
     
     opens org.m946.mvvmfxsample to javafx.fxml, de.saxsys.mvvmfx;
     exports org.m946.mvvmfxsample;
