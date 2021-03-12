@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.m946.mvvmfxsample.db.Country;
+import org.m946.mvvmfxsample.db.CountryVM;
 import org.simpleflatmapper.jdbc.JdbcMapper;
 import org.simpleflatmapper.jdbc.JdbcMapperFactory;
 
@@ -155,7 +156,34 @@ public class TestJdbc {
         
 		Country australia = new Country("Australia", "ADollar");
 		assertEquals(australia, result.get(0));	
-       
-    			
+	}
+	
+	@Test
+	public void testMap2ViewModel() {
+    	final String sql = "select country, currency from country where country = 'USA'";
+    	CountryVM result = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			JdbcMapper<CountryVM> mapper = JdbcMapperFactory.newInstance().newMapper(CountryVM.class);
+			rs.next();
+			result = mapper.map(rs);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					rs.close();
+					ps.close();
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+       assertEquals("USA", result.getCountry());	
+       assertEquals("Dollar", result.getCurrency());
 	}
 }
