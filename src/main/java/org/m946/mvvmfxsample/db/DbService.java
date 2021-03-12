@@ -132,6 +132,33 @@ public class DbService {
 	    	
 	    	return countries;
 	    }
+	  
+	    public CountryVM getUsaVM() {
+	    	final String sql = "select country, currency from country where country = 'USA'";
+	    	CountryVM result = null;
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        try {
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				JdbcMapper<CountryVM> mapper = JdbcMapperFactory.newInstance().newMapper(CountryVM.class);
+				rs.next();
+				result = mapper.map(rs);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						rs.close();
+						ps.close();
+					}
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+	        return result;
+	    }
 	    
 	    public void close() {
 	    	if (conn != null) {
