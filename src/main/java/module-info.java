@@ -5,7 +5,7 @@ module org.m946.mvvmfxsample {
     requires transitive javafx.base;
 	requires javafx.graphics;
 	requires junit;
-	requires java.sql;
+	requires transitive java.sql;
 	requires org.simpleflatmapper.jdbc;
     
     opens org.m946.mvvmfxsample to javafx.fxml, de.saxsys.mvvmfx;

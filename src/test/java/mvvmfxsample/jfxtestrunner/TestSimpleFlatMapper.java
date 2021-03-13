@@ -2,6 +2,8 @@ package mvvmfxsample.jfxtestrunner;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.m946.mvvmfxsample.JfxTestRunner;
 import org.m946.mvvmfxsample.db.CountryVM;
 import org.m946.mvvmfxsample.db.DbService;
+import org.simpleflatmapper.jdbc.Crud;
 
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.TextField;
@@ -30,7 +33,7 @@ public class TestSimpleFlatMapper {
 	
 	@Test
 	public void test() {
-		CountryVM result = dbService.getUsaVM();
+		CountryVM result = dbService.getCountryVM("USA");
 		TextField country = new TextField();
 		TextField currency = new TextField();
 
@@ -45,5 +48,34 @@ public class TestSimpleFlatMapper {
 		assertEquals("Japan", result.getCountry());
 		assertEquals("Yen", result.getCurrency());
 	}
+	
+	@Test
+	public void testCreation() {
+		dbService.beginTransation();
+		
+		CountryVM result = dbService.getCountryVM("USA");
+		TextField country = new TextField();
+		TextField currency = new TextField();
 
+		Bindings.bindBidirectional(country.textProperty(), result.country());
+		Bindings.bindBidirectional(currency.textProperty(), result.currency());
+		
+		
+		country.textProperty().setValue("China");
+		currency.textProperty().setValue("Yuan");
+		assertEquals("China", result.getCountry());
+		assertEquals("Yuan", result.getCurrency());
+	
+		Crud<CountryVM, String> crud = dbService.countryVMCrud();
+		try {
+			crud.create(dbService.getConnection(), result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		CountryVM c = dbService.getCountryVM("China");
+		assertEquals("China", c.getCountry());
+		assertEquals("Yuan", c.getCurrency());
+		dbService.rollback();
+				
+	}
 }

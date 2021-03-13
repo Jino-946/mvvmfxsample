@@ -31,13 +31,13 @@ public class TestDbService {
 	
 	@Test
 	public void testDollar() {
-		assertEquals("Dollar", dbService.getDollar());
+		assertEquals("Dollar", dbService.getCurrency("USA"));
 	}
 	
 	@Test
 	public void testUsa() {
 		Country usa = new Country("USA", "Dollar");
-		assertEquals(usa, dbService.getUsa());
+		assertEquals(usa, dbService.getCountry("USA"));
 	}
 	
 	@Test
