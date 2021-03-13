@@ -30,6 +30,7 @@ public class TestSimpleFlatMapper {
 	public void tearDown() {
 		dbService.close();
 	}
+
 	
 	@Test
 	public void test() {

@@ -19,24 +19,28 @@ public class DbService {
 	private final String PASSWORD = "bakerata";
 	private boolean inTransaction = false;
 
-	public DbService() {
-		try {
-			connection = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public Connection getConnection() {
+		
 		return connection;
 	}
 	
+	public Connection open() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
 	
 	public void beginTransation() {
-		if (connection != null) {
+		if (!inTransaction) {
+			connection = open();
 			inTransaction = true;
 			try {
-				connection.setAutoCommit(!inTransaction);
+				connection.setAutoCommit(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -48,7 +52,7 @@ public class DbService {
 			inTransaction = false;
 			try {
 				connection.commit();
-				connection.setAutoCommit(inTransaction);
+				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -60,7 +64,7 @@ public class DbService {
 			inTransaction = false;
 			try {
 				connection.rollback();
-				connection.setAutoCommit(inTransaction);
+				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -72,8 +76,9 @@ public class DbService {
 		boolean result = false;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection conn = open();
 		try {
-			ps = connection.prepareStatement(SQL);
+			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();
 			rs.next();
 			int n = rs.getInt(1);
@@ -82,9 +87,10 @@ public class DbService {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (connection != null) {
+				if (conn != null) {
 					rs.close();
 					ps.close();
+					conn.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -98,8 +104,9 @@ public class DbService {
 		String result = "";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection conn = open();
 		try {
-			ps = connection.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, country);
 			rs = ps.executeQuery();
 			rs.next();
@@ -112,6 +119,7 @@ public class DbService {
 				if (connection != null) {
 					rs.close();
 					ps.close();
+					conn.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -125,8 +133,9 @@ public class DbService {
 		Country result = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection conn = inTransaction ? connection : open();
 		try {
-			ps = connection.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, country);
 			rs = ps.executeQuery();
 			JdbcMapper<Country> mapper = JdbcMapperFactory.newInstance().newMapper(Country.class);
@@ -137,9 +146,12 @@ public class DbService {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (connection != null) {
+				if (conn != null) {
 					rs.close();
 					ps.close();
+					if (!inTransaction) {
+						conn.close();
+					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -153,8 +165,9 @@ public class DbService {
 		final String sql = "select country, currency from country order by country";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection conn = inTransaction ? connection : open();
 		try {
-			ps = connection.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			JdbcMapper<Country> mapper = JdbcMapperFactory.newInstance().newMapper(Country.class);
 			mapper.stream(rs).forEach(c -> countries.add(c));
@@ -163,9 +176,13 @@ public class DbService {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (connection != null) {
+				if (conn != null) {
 					rs.close();
 					ps.close();
+					if (!inTransaction) {
+						conn.close();
+					}
+					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -180,8 +197,9 @@ public class DbService {
 		CountryVM result = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Connection conn = inTransaction ? connection : open();
 		try {
-			ps = connection.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, countryName);
 			rs = ps.executeQuery();
 			JdbcMapper<CountryVM> mapper = JdbcMapperFactory.newInstance().newMapper(CountryVM.class);
@@ -192,9 +210,12 @@ public class DbService {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (connection != null) {
+				if (conn != null) {
 					rs.close();
 					ps.close();
+					if (!inTransaction) {
+						conn.close();
+					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -219,32 +240,6 @@ public class DbService {
 		
 	}
 	
-	
-	public void insert(CountryVM country) {
-		final String sql = "insert into country(country, currency) values(?, ?)" ;
-		PreparedStatement ps = null;
-		try {
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, country.getCountry());
-			ps.setString(2, country.getCurrency());
-			ps.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (connection != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
-		
-	}
-
 	public void close() {
 		if (connection != null) {
 			try {
