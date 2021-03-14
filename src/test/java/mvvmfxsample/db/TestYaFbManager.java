@@ -93,7 +93,7 @@ public class TestYaFbManager {
 		}
       	assertEquals("円", fbManager.getSingleResult(sql2, String.class, "Japan"));
       	
-      	//Deleteは外部キー制約によりエラーになるのでテストをしない
+      	//Deleteは外部キー制約によりエラーになるのでテストはできない
       	
       	//ロールバック	
       	fbManager.rollback();

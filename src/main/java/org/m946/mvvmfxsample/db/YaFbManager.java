@@ -12,7 +12,15 @@ import org.simpleflatmapper.jdbc.Crud;
 import org.simpleflatmapper.jdbc.JdbcMapper;
 import org.simpleflatmapper.jdbc.JdbcMapperFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
 public class YaFbManager {
+	private final static Logger log = LoggerFactory.getLogger(YaFbManager.class);
+	
+	
 	private String url = null;
 	private final String USER = "SYSDBA";
 	private final String PASSWORD = "bakerata";
@@ -111,8 +119,9 @@ public class YaFbManager {
 	 * @return Eで指定した型のオブジェクト
 	 */
 	public <E> E getSingleResult(String sql, Class<E> type) {
-		E result = null;
+		log.debug(sql);
 		
+		E result = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection conn = getConnection();
@@ -150,8 +159,9 @@ public class YaFbManager {
 	 * @return Eで指定した型のオブジェクトのリスト
 	 */
 	public <E> List<E> getResultList(String sql, Class<E> type) {
-		List<E> result = new ArrayList<>();
+		log.debug(sql);
 		
+		List<E> result = new ArrayList<>();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection conn = getConnection();

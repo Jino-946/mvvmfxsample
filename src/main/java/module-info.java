@@ -8,9 +8,9 @@ module org.m946.mvvmfxsample {
 	requires transitive java.sql;
 	requires org.simpleflatmapper.jdbc;
 	requires java.base;
+	requires org.slf4j;
     
     opens org.m946.mvvmfxsample to javafx.fxml, de.saxsys.mvvmfx;
     exports org.m946.mvvmfxsample;
     exports org.m946.mvvmfxsample.db;
-    
 }
