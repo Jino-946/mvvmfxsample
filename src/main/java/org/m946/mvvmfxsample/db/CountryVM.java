@@ -1,5 +1,7 @@
 package org.m946.mvvmfxsample.db;
 
+import org.simpleflatmapper.jdbc.Crud;
+
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -8,6 +10,9 @@ public class CountryVM implements ViewModel {
 	StringProperty country = new SimpleStringProperty();
 	StringProperty currency = new SimpleStringProperty();
 
+	
+	
+	
 	public CountryVM(String country, String currency) {
 		this.country.set(country);
 		this.currency.set(currency);
@@ -34,6 +39,5 @@ public class CountryVM implements ViewModel {
 	public String getCurrency() {
 		return this.currency.get();
 	}
-	
 	
 }
