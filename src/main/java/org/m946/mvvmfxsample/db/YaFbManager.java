@@ -41,7 +41,7 @@ public class YaFbManager {
 		try {
 			conn = DriverManager.getConnection(url, USER, PASSWORD);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.toString());
 		}
 		return conn;
 	}
@@ -52,8 +52,9 @@ public class YaFbManager {
 			inTransaction = true;
 			try {
 				txConnection.setAutoCommit(false);
+				log.info("トランザクションを開始しました。");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 	}
@@ -63,6 +64,7 @@ public class YaFbManager {
 			inTransaction = false;
 			try {
 				txConnection.commit();
+				log.info("トランザクションをコミットしました。");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -70,7 +72,7 @@ public class YaFbManager {
 					txConnection.close();
 					txConnection = null;
 				} catch (SQLException e) {
-					e.printStackTrace();
+					log.error(e.toString());
 				}
 			}
 		}
@@ -81,14 +83,15 @@ public class YaFbManager {
 			inTransaction = false;
 			try {
 				txConnection.rollback();
+				log.info("トランザクションをロールバックしました。");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error(e.toString());
 			}finally {
 				try {
 					txConnection.close();
 					txConnection = null;
 				} catch (SQLException e) {
-					e.printStackTrace();
+					log.error(e.toString());
 				}
 			}
 		}
@@ -99,7 +102,7 @@ public class YaFbManager {
 			try {
 				txConnection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 	}
@@ -132,7 +135,7 @@ public class YaFbManager {
 			resultSet.next();
 			result = mapper.map(resultSet);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.toString());
 		} finally {
 			try {
 				if (conn != null) {
@@ -143,7 +146,7 @@ public class YaFbManager {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 		
@@ -171,7 +174,7 @@ public class YaFbManager {
 			JdbcMapper<E> mapper = JdbcMapperFactory.newInstance().newMapper(type);
 			mapper.stream(resultSet).forEach(row -> result.add(row));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.toString());
 		} finally {
 			try {
 				if (conn != null) {
@@ -182,7 +185,7 @@ public class YaFbManager {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 		return result;
@@ -206,7 +209,7 @@ public class YaFbManager {
 						.crud(targetType, pkeyType)
 						.table(getConnection(), table);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.toString());
 		}
 		return crud;
 	}
