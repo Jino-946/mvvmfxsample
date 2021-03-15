@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.m946.mvvmfxsample.db.Country;
 import org.m946.mvvmfxsample.db.CountryVM;
+import org.m946.mvvmfxsample.db.FbDao;
 import org.m946.mvvmfxsample.db.YaFbManager;
 import org.simpleflatmapper.jdbc.Crud;
 
@@ -101,5 +102,38 @@ public class TestYaFbManager {
       	assertEquals(14, result.size());   
 	}
 	
-
+	@Test
+	public void testFbDao() {
+		String sql1 = "select country, currency from country order by country";
+    	List<Country> result = fbManager.getResultList(sql1, Country.class);
+      	assertEquals(14, result.size());   
+      	
+		fbManager.beginTransation();
+    	FbDao<Country, String> dao = fbManager.newInstanceOfFbDao("country", Country.class, String.class);
+      	//Create
+    	dao.insert(new Country("China", "Yuan"));
+      	result = fbManager.getResultList(sql1, Country.class);
+      	
+      	assertEquals(15, result.size());   
+      	String sql2 = "select currency from country where country='%s'";
+      	assertEquals("Yuan", fbManager.getSingleResult(sql2, String.class, "China"));
+      	
+      	//Read
+      	Country expected = new Country("Fiji", "FDollar");
+      	Country fiji = null;
+      	fiji = dao.get("Fiji");
+      	assertEquals(expected, fiji);
+      
+      	//Update
+      	Country japan = new Country("Japan", "円");
+      	dao.update(japan);
+      	assertEquals("円", fbManager.getSingleResult(sql2, String.class, "Japan"));
+      	
+      	//Deleteは外部キー制約によりエラーになるのでテストはできない
+      	
+      	//ロールバック	
+      	fbManager.rollback();
+      	result = fbManager.getResultList(sql1, Country.class);
+      	assertEquals(14, result.size());   		
+	}
 }

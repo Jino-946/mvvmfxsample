@@ -192,14 +192,14 @@ public class YaFbManager {
 	}	
 	
 	/**
-	 * テーブルにCRUD操作を行うオブジェクトを生成する
+	 * テーブルにCRUD操作を行うCrudオブジェクトを生成する
 	 * 
-	 * @param <E> DBテーブルをマッピングする型
+	 * @param <E> DBテーブルをマッピングするPOJOの型
 	 * @param <T> DBテーブルの主キーの型
 	 * @param table テーブル名
 	 * @param targetType マッピングするクラス
 	 * @param pkeyType   主キーのクラス
-	 * @return
+	 * @return Crudのインスタンス
 	 */
 	public <E, T> Crud<E, T>createCrud(String table, Class<E> targetType, Class<T>pkeyType){
 		Crud<E, T> crud = null;
@@ -213,8 +213,20 @@ public class YaFbManager {
 		}
 		return crud;
 	}
-	
-	
+
+	/**
+	 * テーブルに対しCRUD操作を行うFbDaoオブジェクトを生成する。
+	 * 
+	 * @param <E> DBテーブルをマッピングするPOJOの型
+	 * @param <T> DBテーブルの主キーの型
+	 * @param table テーブル名
+	 * @param targetType マッピングするクラス
+	 * @param pkeyType   主キーのクラス
+	 * @return FbDaoのインスタンス
+	 */
+	public <E, T> FbDao<E, T> newInstanceOfFbDao(String table, Class<E> targetType, Class<T>pkeyType){
+		return new FbDao<E, T>(this, table, targetType, pkeyType);
+	}
 	
 	/* SQLパラメータありのgetSingleResult*/
 	public <E> E getSingleResult(String sql, Class<E> type, Object arg) {
