@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 
 
 
-public class YaFbManager {
-	private final static Logger log = LoggerFactory.getLogger(YaFbManager.class);
+public class YaJdbcManager {
+	private final static Logger log = LoggerFactory.getLogger(YaJdbcManager.class);
 	
 	
 	private String url = null;
@@ -28,7 +28,7 @@ public class YaFbManager {
 	private Connection txConnection;
 	
 	
-	public YaFbManager(String host, String dbPath) {
+	public YaJdbcManager(String host, String dbPath) {
 		url = "jdbc:firebirdsql:%s/3050:%s?encoding=UTF8".formatted(host, dbPath);
 	}
 	
@@ -224,8 +224,8 @@ public class YaFbManager {
 	 * @param pkeyType   主キーのクラス
 	 * @return FbDaoのインスタンス
 	 */
-	public <E, T> FbDao<E, T> newInstanceOfFbDao(String table, Class<E> targetType, Class<T>pkeyType){
-		return new FbDao<E, T>(this, table, targetType, pkeyType);
+	public <E, T> SfmDao<E, T> newInstanceOfFbDao(String table, Class<E> targetType, Class<T>pkeyType){
+		return new SfmDao<E, T>(this, table, targetType, pkeyType);
 	}
 	
 	/* SQLパラメータありのgetSingleResult*/

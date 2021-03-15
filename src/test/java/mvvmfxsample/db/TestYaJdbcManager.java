@@ -9,15 +9,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.m946.mvvmfxsample.db.Country;
 import org.m946.mvvmfxsample.db.CountryVM;
-import org.m946.mvvmfxsample.db.FbDao;
-import org.m946.mvvmfxsample.db.YaFbManager;
+import org.m946.mvvmfxsample.db.SfmDao;
+import org.m946.mvvmfxsample.db.YaJdbcManager;
 import org.simpleflatmapper.jdbc.Crud;
 
-public class TestYaFbManager {
-	private YaFbManager fbManager = null;
+public class TestYaJdbcManager {
+	private YaJdbcManager fbManager = null;
 	@Before
 	public void setUp() throws Exception {
-		fbManager = new YaFbManager("localhost", "employee");
+		fbManager = new YaJdbcManager("localhost", "employee");
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class TestYaFbManager {
       	assertEquals(14, result.size());   
       	
 		fbManager.beginTransation();
-    	FbDao<Country, String> dao = fbManager.newInstanceOfFbDao("country", Country.class, String.class);
+    	SfmDao<Country, String> dao = fbManager.newInstanceOfFbDao("country", Country.class, String.class);
       	//Create
     	dao.insert(new Country("China", "Yuan"));
       	result = fbManager.getResultList(sql1, Country.class);

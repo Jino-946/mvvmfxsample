@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * import org.simpleflatmapper.jdbc.Crudのラッパークラス<br><br>
+ * org.simpleflatmapper.jdbc.Crudのラッパークラス<br>
+ * SimpleFlatMapperDaoの略 SfmDao<br><br>
+ * DBテーブルに対しCRUD操作を行う。<br>
  * 
  * YaFbManagerのインスタンスからインスタンス化されることを想定している。
  * 
@@ -17,10 +19,10 @@ import org.slf4j.LoggerFactory;
  * @param <E>DBテーブルをマッピングするPOJOの型
  * @param <T>DBテーブルの主キーの型
  */
-public class FbDao<E, T> {
-	private final static Logger log = LoggerFactory.getLogger(FbDao.class);
+public class SfmDao<E, T> {
+	private final static Logger log = LoggerFactory.getLogger(SfmDao.class);
 
-	private YaFbManager fbManager = null;
+	private YaJdbcManager fbManager = null;
 	private String table = null;
 	private Crud<E, T> crud = null;
 	
@@ -30,7 +32,7 @@ public class FbDao<E, T> {
 	 * @param targetType DBテーブルをマッピングするPOJOの型
 	 * @param pkeyType DBテーブルの主キーの型
 	 */
-	public FbDao(YaFbManager fbManager, String table, Class<E> targetType, Class<T>pkeyType) {
+	public SfmDao(YaJdbcManager fbManager, String table, Class<E> targetType, Class<T>pkeyType) {
 		this.fbManager = fbManager;
 		this.table = table;
 		try {
