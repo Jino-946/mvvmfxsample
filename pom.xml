@@ -50,7 +50,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 			<version>1.2.3</version>
@@ -69,7 +69,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<release>11</release>
+					<release>15</release>
+					<compilerArgs>
+						<arg>--add-exports=javafx.graphics/com.sun.javafx.application=org.m946.mvvmfxsample</arg>
+					</compilerArgs>
+
 				</configuration>
 			</plugin>
 			<plugin>

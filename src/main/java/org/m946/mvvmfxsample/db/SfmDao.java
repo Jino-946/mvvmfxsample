@@ -48,15 +48,19 @@ public class SfmDao<E, T> {
 	/**
 	 * テーブルにbeanをインサートする
 	 * @param bean インサートするPOJO
+	 * @throws SQLException 
 	 */
-	public void insert(E bean) {
+	public void insert(E bean) throws SQLException {
 		try {
-			crud.create(fbManager.getConnection(), bean);
 			log.debug("Table: %s insert: %s".formatted(table, bean));
+			crud.create(fbManager.getConnection(), bean);
 		} catch (SQLException e) {
 			log.error(e.toString());
+			throw(e);
 		}
 	}
+
+	
 	
 	/**
 	 * テーブルより主キーで行を取得する
@@ -66,8 +70,8 @@ public class SfmDao<E, T> {
 	public E get(T key) {
 		E result = null;
 		try {
-			result = crud.read(fbManager.getConnection(), key);
 			log.debug("Table: %s get: key = %s".formatted(table, key));
+			result = crud.read(fbManager.getConnection(), key);
 		} catch (SQLException e) {
 			log.error(e.toString());
 		}
@@ -77,26 +81,30 @@ public class SfmDao<E, T> {
 	/**
 	 * テーブルをbeanの内容で更新する
 	 * @param bean 更新する行をマッピングしたPOJO
+	 * @throws SQLException 
 	 */
-	public void update(E bean) {
+	public void update(E bean) throws SQLException {
 		try {
-			crud.update(fbManager.getConnection(), bean);
 			log.debug("Table: %s update: %s".formatted(table, bean));
+			crud.update(fbManager.getConnection(), bean);
 		} catch (SQLException e) {
 			log.error(e.toString());
+			throw(e);
 		}
 	}
 	
 	/**
 	 * テーブルより主キーで指定した行を削除する
 	 * @param key 削除する行の主キーの値
+	 * @throws SQLException 
 	 */
-	public void delete(T key) {
+	public void delete(T key) throws SQLException {
 		try {
-			crud.delete(fbManager.getConnection(), key);
 			log.debug("Table: %s delete: key = ".formatted(table, key));
+			crud.delete(fbManager.getConnection(), key);
 		} catch (SQLException e) {
 			log.error(e.toString());
+			throw(e);
 		}
 		
 	}

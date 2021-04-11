@@ -1,6 +1,5 @@
 package org.m946.mvvmfxsample.db;
 
-import org.simpleflatmapper.jdbc.Crud;
 
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.SimpleStringProperty;

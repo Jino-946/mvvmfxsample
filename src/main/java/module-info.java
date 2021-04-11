@@ -11,6 +11,5 @@ module org.m946.mvvmfxsample {
 	requires org.slf4j;
     
     opens org.m946.mvvmfxsample to javafx.fxml, de.saxsys.mvvmfx;
-    exports org.m946.mvvmfxsample;
     exports org.m946.mvvmfxsample.db;
 }
