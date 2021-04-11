@@ -69,7 +69,7 @@ public class TestYaJdbcManager {
 		fbManager.beginTransation();
       	Crud<Country, String> crud = fbManager.createCrud("country", Country.class, String.class);
     
-     /* 	
+      	
       	//Create
       	try {
 			crud.create(fbManager.getConnection(), new Country("China", "Yuan"));
@@ -79,7 +79,7 @@ public class TestYaJdbcManager {
       	result = fbManager.getResultList(sql1, Country.class);
       	assertEquals(15, result.size());   
       	assertEquals("Yuan", fbManager.getSingleResult(sql2, String.class, "China"));
-     */ 	
+      	
       	//Read
       	Country expected = new Country("Fiji", "FDollar");
       	Country fiji = null;
