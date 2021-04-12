@@ -192,7 +192,10 @@ public class YaJdbcManager {
 	}	
 	
 	/**
-	 * テーブルにCRUD操作を行うCrudオブジェクトを生成する
+	 * テーブルにCRUD操作を行うCrudオブジェクトを生成する<br>
+	 * newInstanceOfFbDaoメソッドの使用を推奨する。
+	 * 
+	 * @deprecated   
 	 * 
 	 * @param <E> DBテーブルをマッピングするPOJOの型
 	 * @param <T> DBテーブルの主キーの型
