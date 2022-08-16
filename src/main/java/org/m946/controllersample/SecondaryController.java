@@ -1,4 +1,4 @@
-package org.m946.mvvmfxsample;
+package org.m946.controllersample;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -7,6 +7,6 @@ public class SecondaryController {
 
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+        MVCApp.setRoot("primary");
     }
 }
