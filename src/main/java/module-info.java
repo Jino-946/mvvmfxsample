@@ -3,7 +3,7 @@ module org.m946.mvvmfxsample {
     requires javafx.fxml;
     requires de.saxsys.mvvmfx;
     requires transitive javafx.base;
-	requires javafx.graphics;
+	requires transitive javafx.graphics;
 	requires junit;
 	requires transitive java.sql;
 	requires org.simpleflatmapper.jdbc;

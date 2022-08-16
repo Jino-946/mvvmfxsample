@@ -59,6 +59,7 @@ public class TestYaJdbcManager {
 	}
 
 	
+	
 	@Test
 	public void testCRUD() {
 		String sql1 = "select country, currency from country order by country";
@@ -67,6 +68,7 @@ public class TestYaJdbcManager {
       	assertEquals(14, result.size());   
       	
 		fbManager.beginTransation();
+		@SuppressWarnings("deprecation")
       	Crud<Country, String> crud = fbManager.createCrud("country", Country.class, String.class);
     
       	
