@@ -108,7 +108,7 @@ public class TestYaJdbcManager {
 	}
 
 	@Test
-	public void testFbDao() throws SQLException {
+	public void testSfmDao() throws SQLException {
 		String sql1 = "select country, currency from country order by country";
       	String sql2 = "select currency from country where country='%s'";
 
