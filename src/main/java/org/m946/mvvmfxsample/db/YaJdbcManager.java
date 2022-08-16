@@ -218,7 +218,10 @@ public class YaJdbcManager {
 	}
 
 	/**
-	 * テーブルに対しCRUD操作を行うFbDaoオブジェクトを生成する。
+	 * テーブルに対しCRUD操作を行うSfmDaoオブジェクトを生成する。
+	 * <br>
+	 *  SfmDao &ltCountry, String&gt countryDao = fbManager.newInstanceOfSfmDao("country", Country.class, String.class);
+     *
 	 * 
 	 * @param <E> DBテーブルをマッピングするPOJOの型
 	 * @param <T> DBテーブルの主キーの型
@@ -227,7 +230,7 @@ public class YaJdbcManager {
 	 * @param pkeyType   主キーのクラス
 	 * @return FbDaoのインスタンス
 	 */
-	public <E, T> SfmDao<E, T> newInstanceOfFbDao(String table, Class<E> targetType, Class<T>pkeyType){
+	public <E, T> SfmDao<E, T> newInstanceOfSfmDao(String table, Class<E> targetType, Class<T>pkeyType){
 		return new SfmDao<E, T>(this, table, targetType, pkeyType);
 	}
 	

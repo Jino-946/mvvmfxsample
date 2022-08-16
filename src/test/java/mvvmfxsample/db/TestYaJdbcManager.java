@@ -116,7 +116,7 @@ public class TestYaJdbcManager {
       	assertEquals(14, result.size());   
       	
 		fbManager.beginTransation();
-    	SfmDao<Country, String> countryDao = fbManager.newInstanceOfFbDao("country", Country.class, String.class);
+    	SfmDao<Country, String> countryDao = fbManager.newInstanceOfSfmDao("country", Country.class, String.class);
 
     	try {
     		countryDao.insert(new Country("China", "Yuan"));
