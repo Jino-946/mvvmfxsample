@@ -6,7 +6,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
-import com.sun.javafx.application.PlatformImpl;
+import javafx.application.Platform;
+
 
 /**
  * This runner can be used to run JUnit-Tests on the JavaFx-Thread. This class can be used as a parameter to
@@ -56,9 +57,9 @@ private static void setupJavaFX() throws InterruptedException
     final CountDownLatch latch = new CountDownLatch( 1 );
 
     // initializes JavaFX environment
-    PlatformImpl.startup( () ->
+    Platform.startup( () ->
     {
-      /* No need to do anything here */
+      // No need to do anything here 
     } );
 
     latch.countDown();
