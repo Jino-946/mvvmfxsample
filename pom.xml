@@ -7,15 +7,15 @@
 	<version>0.1</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>15</maven.compiler.source>
-		<maven.compiler.target>15</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<mainClass>org.m946.mvvmfxsample.Starter</mainClass>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>15</version>
+			<version>17.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
