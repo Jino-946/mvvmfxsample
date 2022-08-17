@@ -1,11 +1,10 @@
 package org.m946.mvvmfxsample.db;
 
 
-import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class CountryDTO {// implements ViewModel {
+public class CountryDTO {
 	StringProperty country = new SimpleStringProperty();
 	StringProperty currency = new SimpleStringProperty();
 
