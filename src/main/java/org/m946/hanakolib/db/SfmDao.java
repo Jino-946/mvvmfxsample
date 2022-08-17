@@ -1,4 +1,4 @@
-package org.m946.mvvmfxsample.db;
+package org.m946.hanakolib.db;
 
 import java.sql.SQLException;
 
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class SfmDao<E, T> {
 	private final static Logger log = LoggerFactory.getLogger(SfmDao.class);
 
-	private YaJdbcManager fbManager = null;
+	private JaybirdManager fbManager = null;
 	private String table = null;
 	private Crud<E, T> crud = null;
 	
@@ -32,7 +32,7 @@ public class SfmDao<E, T> {
 	 * @param targetType DBテーブルをマッピングするPOJOの型
 	 * @param pkeyType DBテーブルの主キーの型
 	 */
-	public SfmDao(YaJdbcManager fbManager, String table, Class<E> targetType, Class<T>pkeyType) {
+	public SfmDao(JaybirdManager fbManager, String table, Class<E> targetType, Class<T>pkeyType) {
 		this.fbManager = fbManager;
 		this.table = table;
 		try {

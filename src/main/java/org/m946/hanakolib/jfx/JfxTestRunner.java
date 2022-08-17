@@ -1,4 +1,4 @@
-package org.m946.mvvmfxsample;
+package org.m946.hanakolib.jfx;
 
 import java.util.concurrent.CountDownLatch;
 

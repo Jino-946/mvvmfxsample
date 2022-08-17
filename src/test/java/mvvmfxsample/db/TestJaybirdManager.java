@@ -8,18 +8,18 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.m946.hanakolib.db.SfmDao;
+import org.m946.hanakolib.db.JaybirdManager;
 import org.m946.mvvmfxsample.db.Country;
 import org.m946.mvvmfxsample.db.CountryDTO;
-import org.m946.mvvmfxsample.db.SfmDao;
-import org.m946.mvvmfxsample.db.YaJdbcManager;
 import org.simpleflatmapper.jdbc.Crud;
 
-public class TestYaJdbcManager {
-	private YaJdbcManager fbManager = null;
+public class TestJaybirdManager {
+	private JaybirdManager fbManager = null;
 	
 	@Before
 	public void setUp() throws Exception {
-		fbManager = new YaJdbcManager("localhost", "employee");
+		fbManager = new JaybirdManager("localhost", "employee");
 	}
 
 	@Test

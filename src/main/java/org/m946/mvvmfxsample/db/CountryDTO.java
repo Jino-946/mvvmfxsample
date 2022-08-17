@@ -7,8 +7,8 @@ import javafx.beans.property.StringProperty;
 
 /**
  * DTOクラスではjavafx.beansプロパティをフィールドに定義することでViewのJavaFXコントロールとバインディングし、
- * プロパティフィールドに改めてgetter、setterを定義しSimpleFlatMapperのJdbcMapperFactoryを利用することで
- * DBのテーブルとマッピングすることを可能にする。<br>
+ * プロパティフィールドに改めてgetter、setterを定義して、SimpleFlatMapperのJdbcMapperFactoryを使ってプロパティを
+ * DBのテーブルとマッピングする。<br>
  * つまりDTOクラスを定義することよりJavaFXコントロールとDBテーブルを直接マッピングすることが可能になる。
  * 
  *<pre>{@code

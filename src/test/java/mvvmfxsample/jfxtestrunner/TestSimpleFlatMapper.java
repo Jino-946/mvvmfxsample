@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.m946.mvvmfxsample.JfxTestRunner;
+import org.m946.hanakolib.jfx.JfxTestRunner;
 import org.m946.mvvmfxsample.db.CountryDTO;
 import org.m946.mvvmfxsample.db.DbService;
 import org.simpleflatmapper.jdbc.Crud;

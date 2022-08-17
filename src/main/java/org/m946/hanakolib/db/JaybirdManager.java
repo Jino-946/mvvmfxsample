@@ -1,4 +1,4 @@
-package org.m946.mvvmfxsample.db;
+package org.m946.hanakolib.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 
 
 
-public class YaJdbcManager {
-	private final static Logger log = LoggerFactory.getLogger(YaJdbcManager.class);
+public class JaybirdManager {
+	private final static Logger log = LoggerFactory.getLogger(JaybirdManager.class);
 	
 	
 	private String url = null;
@@ -28,7 +28,7 @@ public class YaJdbcManager {
 	private Connection txConnection;
 	
 	
-	public YaJdbcManager(String host, String dbPath) {
+	public JaybirdManager(String host, String dbPath) {
 		url = "jdbc:firebirdsql:%s/3050:%s?encoding=UTF8".formatted(host, dbPath);
 	}
 	
