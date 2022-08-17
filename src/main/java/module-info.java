@@ -12,7 +12,7 @@ module org.m946.mvvmfxsample {
     
     opens org.m946.mvvmfxsample  to javafx.fxml, de.saxsys.mvvmfx, junit;
     opens org.m946.controllersample  to javafx.fxml, de.saxsys.mvvmfx, junit;
-    exports org.m946.mvvmfxsample;
+    exports org.m946.hanakolib.db;
+    exports org.m946.hanakolib.jfx;
     exports org.m946.mvvmfxsample.db;
-    exports org.m946.controllersample;
 }
