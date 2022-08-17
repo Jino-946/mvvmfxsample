@@ -5,14 +5,14 @@ import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class CountryVM implements ViewModel {
+public class CountryDTO {// implements ViewModel {
 	StringProperty country = new SimpleStringProperty();
 	StringProperty currency = new SimpleStringProperty();
 
 	
 	
 	
-	public CountryVM(String country, String currency) {
+	public CountryDTO(String country, String currency) {
 		this.country.set(country);
 		this.currency.set(currency);
 	}

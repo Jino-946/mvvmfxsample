@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.m946.mvvmfxsample.db.Country;
-import org.m946.mvvmfxsample.db.CountryVM;
+import org.m946.mvvmfxsample.db.CountryDTO;
 import org.m946.mvvmfxsample.db.SfmDao;
 import org.m946.mvvmfxsample.db.YaJdbcManager;
 import org.simpleflatmapper.jdbc.Crud;
@@ -53,7 +53,7 @@ public class TestYaJdbcManager {
 	@Test
 	public void testMap2ViewModel() {
     	String sql = "select country, currency from country where country = '%s'";
-    	CountryVM result = fbManager.getSingleResult(sql, CountryVM.class, "Japan");
+    	CountryDTO result = fbManager.getSingleResult(sql, CountryDTO.class, "Japan");
     	assertEquals("Japan", result.getCountry());
     	assertEquals("Yen", result.getCurrency());
 	}

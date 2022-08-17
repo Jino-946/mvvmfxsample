@@ -192,9 +192,9 @@ public class DbService {
 		return countries;
 	}
 
-	public CountryVM getCountryVM(String countryName) {
+	public CountryDTO getCountryDTO(String countryName) {
 		final String sql = "select country, currency from country where country = ?" ;
-		CountryVM result = null;
+		CountryDTO result = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection conn = inTransaction ? connection : open();
@@ -202,7 +202,7 @@ public class DbService {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, countryName);
 			rs = ps.executeQuery();
-			JdbcMapper<CountryVM> mapper = JdbcMapperFactory.newInstance().newMapper(CountryVM.class);
+			JdbcMapper<CountryDTO> mapper = JdbcMapperFactory.newInstance().newMapper(CountryDTO.class);
 			rs.next();
 			result = mapper.map(rs);
 
@@ -226,12 +226,12 @@ public class DbService {
 	
 	
 	
-	public Crud<CountryVM, String> countryVMCrud(){
-		Crud<CountryVM, String> crud = null;
+	public Crud<CountryDTO, String> countryVMCrud(){
+		Crud<CountryDTO, String> crud = null;
 		try {
 			crud = JdbcMapperFactory
 				.newInstance()
-				.crud(CountryVM.class, String.class)
+				.crud(CountryDTO.class, String.class)
 				.table(connection, "country");
 		} catch (SQLException e) {
 			e.printStackTrace();

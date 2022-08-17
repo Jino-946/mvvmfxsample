@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.m946.mvvmfxsample.JfxTestRunner;
-import org.m946.mvvmfxsample.db.CountryVM;
+import org.m946.mvvmfxsample.db.CountryDTO;
 import org.m946.mvvmfxsample.db.DbService;
 import org.simpleflatmapper.jdbc.Crud;
 
@@ -34,7 +34,7 @@ public class TestSimpleFlatMapper {
 	
 	@Test
 	public void test() {
-		CountryVM result = dbService.getCountryVM("USA");
+		CountryDTO result = dbService.getCountryDTO("USA");
 		TextField country = new TextField();
 		TextField currency = new TextField();
 
@@ -54,7 +54,7 @@ public class TestSimpleFlatMapper {
 	public void testCreation() {
 		dbService.beginTransation();
 		
-		CountryVM result = dbService.getCountryVM("USA");
+		CountryDTO result = dbService.getCountryDTO("USA");
 		TextField country = new TextField();
 		TextField currency = new TextField();
 
@@ -67,13 +67,13 @@ public class TestSimpleFlatMapper {
 		assertEquals("China", result.getCountry());
 		assertEquals("Yuan", result.getCurrency());
 	
-		Crud<CountryVM, String> crud = dbService.countryVMCrud();
+		Crud<CountryDTO, String> crud = dbService.countryVMCrud();
 		try {
 			crud.create(dbService.getConnection(), result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		CountryVM c = dbService.getCountryVM("China");
+		CountryDTO c = dbService.getCountryDTO("China");
 		assertEquals("China", c.getCountry());
 		assertEquals("Yuan", c.getCurrency());
 		dbService.rollback();

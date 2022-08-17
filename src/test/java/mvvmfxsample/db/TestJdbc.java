@@ -14,7 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.m946.mvvmfxsample.db.Country;
-import org.m946.mvvmfxsample.db.CountryVM;
+import org.m946.mvvmfxsample.db.CountryDTO;
 import org.simpleflatmapper.jdbc.JdbcMapper;
 import org.simpleflatmapper.jdbc.JdbcMapperFactory;
 
@@ -161,13 +161,13 @@ public class TestJdbc {
 	@Test
 	public void testMap2ViewModel() {
     	final String sql = "select country, currency from country where country = 'USA'";
-    	CountryVM result = null;
+    	CountryDTO result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			JdbcMapper<CountryVM> mapper = JdbcMapperFactory.newInstance().newMapper(CountryVM.class);
+			JdbcMapper<CountryDTO> mapper = JdbcMapperFactory.newInstance().newMapper(CountryDTO.class);
 			rs.next();
 			result = mapper.map(rs);
 			
