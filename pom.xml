@@ -33,6 +33,7 @@
 			<artifactId>jaybird</artifactId>
 			<version>4.0.2.java11</version>
 		</dependency>
+		<!-- sfm-jdbc のartifactId を変更しないこと-->
 		<dependency>
 			<groupId>org.simpleflatmapper</groupId>
 			<artifactId>sfm-jdbc-jre9</artifactId>
