@@ -37,12 +37,15 @@ public class CountryDTO {
 
 	
 	
-	
 	public CountryDTO(String country, String currency) {
 		this.country.set(country);
 		this.currency.set(currency);
 	}
-	
+
+	public CountryDTO(Country pojo) {
+		this(pojo.getCountry(), pojo.getCurrency());
+	}
+
 	/* Viewコントロールとバインディング用のプロパティの定義*/
 	public StringProperty country() {
 		return country;

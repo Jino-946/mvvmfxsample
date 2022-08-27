@@ -52,7 +52,7 @@ public class JaybirdManager {
 			inTransaction = true;
 			try {
 				txConnection.setAutoCommit(false);
-				log.info("トランザクションを開始しました。");
+				log.debug("トランザクションを開始しました。");
 			} catch (SQLException e) {
 				log.error(e.toString());
 			}
@@ -64,7 +64,7 @@ public class JaybirdManager {
 			inTransaction = false;
 			try {
 				txConnection.commit();
-				log.info("トランザクションをコミットしました。");
+				log.debug("トランザクションをコミットしました。");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -83,7 +83,7 @@ public class JaybirdManager {
 			inTransaction = false;
 			try {
 				txConnection.rollback();
-				log.info("トランザクションをロールバックしました。");
+				log.debug("トランザクションをロールバックしました。");
 			} catch (SQLException e) {
 				log.error(e.toString());
 			}finally {
@@ -231,6 +231,7 @@ public class JaybirdManager {
 	 * @return FbDaoのインスタンス
 	 */
 	public <E, T> SfmDao<E, T> newInstanceOfSfmDao(String table, Class<E> targetType, Class<T>pkeyType){
+		log.debug(targetType.getName() + "のCRUD操作用SfmDaoを生成しました。");
 		return new SfmDao<E, T>(this, table, targetType, pkeyType);
 	}
 	

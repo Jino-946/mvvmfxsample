@@ -36,6 +36,7 @@ public class SfmDao<E, T> {
 		this.fbManager = fbManager;
 		this.table = table;
 		try {
+			log.debug("Table=" + table + "\nTargetType=" +targetType.getSimpleName() + "\npkeyType=" + pkeyType.getSimpleName() + "\n");
 			crud = JdbcMapperFactory
 						.newInstance()
 						.crud(targetType, pkeyType)
@@ -52,7 +53,7 @@ public class SfmDao<E, T> {
 	 */
 	public void insert(E bean) throws SQLException {
 		try {
-			log.debug("Table: %s insert: %s".formatted(table, bean));
+			log.info("Table: %s insert: %s".formatted(table, bean));
 			crud.create(fbManager.getConnection(), bean);
 		} catch (SQLException e) {
 			log.error(e.toString());
@@ -70,7 +71,7 @@ public class SfmDao<E, T> {
 	public E get(T key) {
 		E result = null;
 		try {
-			log.debug("Table: %s get: key = %s".formatted(table, key));
+			log.info("Table: %s get: key = %s".formatted(table, key));
 			result = crud.read(fbManager.getConnection(), key);
 		} catch (SQLException e) {
 			log.error(e.toString());
@@ -85,7 +86,7 @@ public class SfmDao<E, T> {
 	 */
 	public void update(E bean) throws SQLException {
 		try {
-			log.debug("Table: %s update: %s".formatted(table, bean));
+			log.info("Table: %s update: %s".formatted(table, bean));
 			crud.update(fbManager.getConnection(), bean);
 		} catch (SQLException e) {
 			log.error(e.toString());
@@ -100,7 +101,7 @@ public class SfmDao<E, T> {
 	 */
 	public void delete(T key) throws SQLException {
 		try {
-			log.debug("Table: %s delete: key = ".formatted(table, key));
+			log.info("Table: %s delete: key = ".formatted(table, key));
 			crud.delete(fbManager.getConnection(), key);
 		} catch (SQLException e) {
 			log.error(e.toString());

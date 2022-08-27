@@ -4,11 +4,11 @@
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%highlight([%-5level] %date{yyyy-MM-dd HH:mm:ss} [%thread] %logger{0}) \(%file:%line\) %n %magenta(%msg) %n</pattern>
+			<pattern>%highlight([%-5level] %date{yyyy-MM-dd HH:mm:ss} [%thread] %logger{0}) \(%file:%line\) %n%magenta(%msg) %n</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>INFO</level>
-			<onMatch>ACCEPT</onMatch>
+			<onMatch>DENY</onMatch>
 		</filter>	
 	</appender>
 
@@ -43,6 +43,12 @@
 	</appender>
 
 	<logger name="org.m946.mvvmfxsample">
+		<level value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ERROR" />
+		<appender-ref ref="INFO" />
+	</logger>
+	<logger name="org.m946.hanakolib.db">
 		<level value="DEBUG" />
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ERROR" />

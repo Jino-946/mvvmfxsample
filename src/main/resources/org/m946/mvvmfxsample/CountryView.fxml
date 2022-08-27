@@ -44,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.tbee.javafx.scene.layout.fxml.MigPane?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.m946.mvvmfxsample.CountryView">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -66,17 +66,17 @@
          <children>
             <TableView fx:id="tableView" prefHeight="348.0" prefWidth="640.0">
               <columns>
-                <TableColumn fx:id="seq" editable="false" prefWidth="75.0" sortable="false" text="No." />
-                <TableColumn prefWidth="419.0" text="国名" />
-                  <TableColumn prefWidth="114.0" text="通貨" />
+                <TableColumn fx:id="seqCol" editable="false" prefWidth="75.0" sortable="false" text="No." />
+                <TableColumn fx:id="countryCol" prefWidth="419.0" text="国名" />
+                  <TableColumn fx:id="currencyCol" prefWidth="114.0" text="通貨" />
               </columns>
             </TableView>
             <MigPane cols="[][][]" prefHeight="107.0" prefWidth="640.0" MigPane.cc="wrap">
             	<Label text="国名" />
-            	<TextField fx:id="country" MigPane.cc="wrap" />
+            	<TextField fx:id="countryFld" MigPane.cc="wrap" />
             	<Label text="通貨" />
-            	<TextField fx:id="currency" />
-               <Button mnemonicParsing="false" text="保存" />
+            	<TextField fx:id="currencyFld" />
+               <Button mnemonicParsing="false" onAction="#updateCountry" text="保存" />
             </MigPane> 
          </children>
       </VBox>
